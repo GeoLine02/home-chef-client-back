@@ -75,7 +75,7 @@ export class PaymentsController {
     @Query('orderID') orderID: string,
   ) {
     const { Type, PaymentStatus } = req.body || {};
-    console.log(PaymentStatus);
+
     if (Type === 'AddCard' && PaymentStatus === 'Captured') {
       const card = await this.paymentsService.addNewCard(req.body, +userID);
       return await this.ordersService.updateOrder(+orderID, +card.id);

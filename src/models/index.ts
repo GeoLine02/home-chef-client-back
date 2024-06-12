@@ -10,6 +10,7 @@ import { PaymentTransactions } from './payment-transactions';
 import { UserPaymentMethod } from './user-payment-methods';
 import { Orders } from './orders';
 import { OrderProducts } from './orderProducts';
+import { GlobalConfig } from './globalConfig';
 export {
   User,
   UserAddress,
@@ -23,4 +24,5 @@ export {
   UserPaymentMethod,
   Orders,
   OrderProducts,
+  GlobalConfig,
 };

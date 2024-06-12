@@ -1,5 +1,7 @@
 import * as bcrypt from 'bcrypt';
 import * as moment from 'moment'; // Import moment like this
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const haversine = require('haversine');
 
 export async function hashStr(str: string, saltOrRounds = 5): Promise<string> {
   const hash = await bcrypt.hash(str, saltOrRounds);
@@ -31,3 +33,9 @@ export const datePicker = () => {
     time: formattedTime,
   };
 };
+
+//calculates distance between 2 objects
+export const calculateHaversineDistance = (
+  coords1: { longitude: number; latitude: number },
+  coords2: { longitude: number; latitude: number },
+) => haversine(coords1, coords2);
