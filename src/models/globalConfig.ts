@@ -2,8 +2,8 @@ import { Column, Model, PrimaryKey, Table } from 'sequelize-typescript';
 
 @Table
 export class GlobalConfig extends Model {
-  @Column({ unique: true })
   @PrimaryKey
+  @Column({ unique: true })
   id: number;
   key: string;
 

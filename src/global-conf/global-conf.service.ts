@@ -1,9 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { GlobalConfig } from '../models/index';
 
 @Injectable()
 export class GlobalConfService {
-  constructor(private globalConfigRepo: typeof GlobalConfig) {}
+  constructor(
+    @Inject('GLOBAL_CONFIG_REPO')
+    private globalConfigRepo: typeof GlobalConfig,
+  ) {}
 
   async get(key: string): Promise<GlobalConfig> {
     try {

@@ -65,7 +65,7 @@ export class PaymentsService {
       const response = data.data.data.payment;
 
       if (!response.paymentUrl) {
-        res.status(201).json(response);
+        return res.status(201).json(response);
       }
       res.status(201).json({ paymentUrl: response.paymentUrl });
     } catch (error) {
