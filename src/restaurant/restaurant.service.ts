@@ -75,7 +75,7 @@ export class RestaurantService {
       limit: 15,
     });
 
-    await this.cacheManager.set(cacheKey, result, 1800); //1800 second is 30 minute
+    await this.cacheManager.set(cacheKey, result, 60); //1 minute defined in secs
 
     return result;
   }

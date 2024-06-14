@@ -11,7 +11,7 @@ export class UserService {
 
   async finByEmail(email: string): Promise<any> {
     return await this.userRepository.findOne({
-      where: { email },
+      where: { email, isAccountActive: true },
       raw: true,
     });
   }

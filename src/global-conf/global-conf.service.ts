@@ -1,14 +1,14 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { GlobalConfig } from '../models/index';
+import { GlobalConfigs } from '../models/index';
 
 @Injectable()
 export class GlobalConfService {
   constructor(
     @Inject('GLOBAL_CONFIG_REPO')
-    private globalConfigRepo: typeof GlobalConfig,
+    private globalConfigRepo: typeof GlobalConfigs,
   ) {}
 
-  async get(key: string): Promise<GlobalConfig> {
+  async get(key: string): Promise<GlobalConfigs> {
     try {
       if (!key) {
         throw new Error('provide proper key');
@@ -22,7 +22,7 @@ export class GlobalConfService {
     }
   }
 
-  async set(key: string, value: string): Promise<boolean | GlobalConfig> {
+  async set(key: string, value: string): Promise<boolean | GlobalConfigs> {
     try {
       if (!key || !value) {
         throw new Error('please provide correct propertys');
@@ -31,7 +31,6 @@ export class GlobalConfService {
       return await this.globalConfigRepo.create({ key, value });
     } catch (error) {
       console.log('error: ', error);
-      throw false;
     }
   }
 }
