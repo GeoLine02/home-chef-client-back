@@ -1,4 +1,9 @@
-import { Injectable, Inject } from '@nestjs/common';
+import {
+  Injectable,
+  Inject,
+  HttpException,
+  NotFoundException,
+} from '@nestjs/common';
 import { calculateDistance, mToKM } from 'src/helpers/index';
 import { toFixedMoney } from 'src/helpers/currency';
 import { GlobalConfService } from 'src/global-conf/global-conf.service';
@@ -50,8 +55,7 @@ export class CalculationService {
 
       return toFixedMoney(totalCost);
     } catch (error) {
-      console.error('Error calculating order total price:', error);
-      throw new Error('Failed to calculate order total price');
+      throw new HttpException('unhandled server error', 500);
     }
   }
 
@@ -105,7 +109,7 @@ export class CalculationService {
       where: { id: product.id },
     });
     if (!productInfo) {
-      throw new Error(`Product with id ${product.id} not found`);
+      throw new NotFoundException('unhandled data');
     }
 
     const price = productInfo.productPrice;
