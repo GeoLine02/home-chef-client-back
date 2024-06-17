@@ -35,7 +35,22 @@ export const datePicker = () => {
 };
 
 //calculates distance between 2 objects
-export const calculateHaversineDistance = (
+export const calculateDistance = (
   coords1: { longitude: number; latitude: number },
   coords2: { longitude: number; latitude: number },
-) => haversine(coords1, coords2);
+  unit = 'meter',
+) => {
+  const start = {
+    latitude: coords1.latitude,
+    longitude: coords1.longitude,
+  };
+
+  const end = {
+    latitude: coords2.latitude,
+    longitude: coords2.longitude,
+  };
+
+  return haversine(start, end, { unit });
+};
+
+export const mToKM = (m: number): number => +(m / 1000).toFixed(3);

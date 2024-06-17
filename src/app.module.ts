@@ -18,7 +18,7 @@ import {
   UserPaymentMethod,
   Orders,
   OrderProducts,
-  GlobalConfig,
+  GlobalConfigs,
 } from './models/index';
 import { SearchModule } from './search/search.module';
 import { RestaurantCategoriesModule } from './restaurant-types/restaurant-types.module';
@@ -29,6 +29,7 @@ import { ProfileModule } from './profile/profile.module';
 import { PaymentsModule } from './payments/payments.module';
 import { OrdersModule } from './orders/orders.module';
 import { GlobalConfModule } from './global-conf/global-conf.module';
+import { CalculationModule } from './calculation/calculation.module';
 
 @Module({
   imports: [
@@ -60,7 +61,7 @@ import { GlobalConfModule } from './global-conf/global-conf.module';
           UserPaymentMethod,
           Orders,
           OrderProducts,
-          GlobalConfig,
+          GlobalConfigs,
         ],
         pool: {
           min: 0,
@@ -81,6 +82,7 @@ import { GlobalConfModule } from './global-conf/global-conf.module';
     OrdersModule,
     ConfigModule,
     GlobalConfModule,
+    CalculationModule,
   ],
   controllers: [],
   providers: [],
