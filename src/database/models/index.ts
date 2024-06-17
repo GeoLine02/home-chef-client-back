@@ -10,7 +10,7 @@ import { PaymentTransactions } from './payment-transactions';
 import { UserPaymentMethod } from './user-payment-methods';
 import { Orders } from './orders';
 import { OrderProducts } from './orderProducts';
-import { GlobalConfig } from './globalConfig';
+import { GlobalConfigs } from './globalConfig';
 import { RestaurantAddress } from './restaurantAddress';
 import { Locales } from './Locales';
 export {
@@ -26,7 +26,7 @@ export {
   UserPaymentMethod,
   Orders,
   OrderProducts,
-  GlobalConfig,
+  GlobalConfigs,
   RestaurantAddress,
   Locales,
 };

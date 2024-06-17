@@ -1,4 +1,4 @@
-import { RestaurantSettings } from '../models/index';
+import { RestaurantSettings } from 'src/database/models/index';
 
 export const restaurantSettingsProviders = [
   {

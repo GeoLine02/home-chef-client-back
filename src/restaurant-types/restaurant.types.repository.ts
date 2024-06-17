@@ -1,4 +1,4 @@
-import { RestaurantTypes } from '../models/index';
+import { RestaurantTypes } from 'src/database/models/index';
 
 export const restaurantTypesProviders = [
   {

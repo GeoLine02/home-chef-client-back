@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { GlobalConfigs } from '../models/index';
+import { GlobalConfigs } from '../database/models/index';
 
 @Injectable()
 export class GlobalConfService {

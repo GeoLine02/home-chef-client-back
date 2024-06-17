@@ -7,7 +7,7 @@ import {
 import { calculateDistance, mToKM } from 'src/helpers/index';
 import { toFixedMoney } from 'src/helpers/currency';
 import { GlobalConfService } from 'src/global-conf/global-conf.service';
-import { Products } from 'src/models/index';
+import { Products } from 'src/database/models/index';
 
 interface Coordinates {
   latitude: number;

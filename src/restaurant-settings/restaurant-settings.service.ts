@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { RestaurantSettings } from 'src/models/index';
+import { RestaurantSettings } from '../database/models/index';
 
 @Injectable()
 export class RestaurantSettingsService {

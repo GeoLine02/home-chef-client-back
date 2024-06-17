@@ -1,4 +1,8 @@
-import { UserPaymentMethod, PaymentTransactions, Orders } from 'src/models';
+import {
+  UserPaymentMethod,
+  PaymentTransactions,
+  Orders,
+} from 'src/database/models/index';
 
 export const paymentsProvider = [
   {

@@ -18,10 +18,10 @@ import {
   UserPaymentMethod,
   Orders,
   OrderProducts,
-  GlobalConfig,
+  GlobalConfigs,
   RestaurantAddress,
   Locales,
-} from './models/index';
+} from './database/models/index';
 import { SearchModule } from './search/search.module';
 import { RestaurantCategoriesModule } from './restaurant-types/restaurant-types.module';
 import { CacheModule } from '@nestjs/cache-manager';
@@ -64,7 +64,7 @@ import { CalculationModule } from './calculation/calculation.module';
           PaymentTransactions,
           Orders,
           OrderProducts,
-          GlobalConfig,
+          GlobalConfigs,
           Locales,
         ],
         pool: {

@@ -4,8 +4,10 @@ import {
   Injectable,
   InternalServerErrorException,
 } from '@nestjs/common';
-
-import { PaymentTransactions, UserPaymentMethod } from 'src/models';
+import {
+  PaymentTransactions,
+  UserPaymentMethod,
+} from 'src/database/models/index';
 import axios from 'axios';
 import { Response } from 'express';
 import { CustomOrderType } from 'src/types/custom.types';

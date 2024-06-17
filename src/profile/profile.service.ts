@@ -6,7 +6,12 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 
-import { Restaurant, FavoriteRestaurants, UserAddress, User } from 'src/models';
+import {
+  Restaurant,
+  FavoriteRestaurants,
+  UserAddress,
+  User,
+} from 'src/database/models/index';
 import { NewAddressDTO } from './dto/new-address.dto';
 import { UpdateAddressDTO } from './dto/update-address.dto';
 

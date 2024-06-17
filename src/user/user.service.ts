@@ -1,5 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { User, FavoriteRestaurants, UserAddress } from '../models/index';
+import {
+  User,
+  FavoriteRestaurants,
+  UserAddress,
+} from 'src/database/models/index';
 
 @Injectable()
 export class UserService {

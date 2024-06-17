@@ -1,4 +1,9 @@
-import { Restaurant, FavoriteRestaurants, UserAddress, User } from 'src/models';
+import {
+  Restaurant,
+  FavoriteRestaurants,
+  UserAddress,
+  User,
+} from 'src/database/models/index';
 
 export const profileProviders = [
   {

@@ -1,4 +1,4 @@
-import { Products } from '../models/index';
+import { Products } from 'src/database/models/index';
 
 export const productsRepository = [
   {

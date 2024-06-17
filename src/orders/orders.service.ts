@@ -5,7 +5,12 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 import { CreateOrderDto } from './dto/create-order.dto';
-import { OrderProducts, Orders, Products, UserAddress } from 'src/models';
+import {
+  OrderProducts,
+  Orders,
+  Products,
+  UserAddress,
+} from 'src/database/models/index';
 //raise condition multex
 @Injectable()
 export class OrdersService {

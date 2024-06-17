@@ -1,5 +1,5 @@
-import { UserAddress } from 'src/models';
-import { User } from '../models/user';
+import { UserAddress } from 'src/database/models/index';
+import { User } from 'src/database/models/index';
 
 export const userProviders = [
   {

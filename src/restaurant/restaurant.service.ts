@@ -5,7 +5,7 @@ import {
   Restaurant,
   RestaurantSettings,
   RestaurantTypesJunctions,
-} from '../models/index';
+} from 'src/database/models/index';
 import { datePicker } from 'src/helpers';
 import { RestaurantSettingsService } from 'src/restaurant-settings/restaurant-settings.service';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';

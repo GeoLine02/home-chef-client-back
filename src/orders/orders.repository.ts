@@ -1,4 +1,4 @@
-import { OrderProducts, Orders, Products } from 'src/models';
+import { OrderProducts, Orders, Products } from 'src/database/models/index';
 
 export const orderProviders = [
   {

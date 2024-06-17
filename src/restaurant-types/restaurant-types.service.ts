@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { RestaurantTypes } from 'src/models/index';
+import { RestaurantTypes } from 'src/database/models/index';
 import { CACHE_MANAGER, Cache } from '@nestjs/cache-manager';
 
 export interface IRestaurantCategories {
