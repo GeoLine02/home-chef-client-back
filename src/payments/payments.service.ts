@@ -67,6 +67,7 @@ export class PaymentsService {
       if (!response.paymentUrl) {
         return res.status(201).json(response);
       }
+
       res.status(201).json({ paymentUrl: response.paymentUrl });
     } catch (error) {
       throw new Error(error);
