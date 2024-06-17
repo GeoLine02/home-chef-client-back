@@ -19,6 +19,8 @@ import {
   Orders,
   OrderProducts,
   GlobalConfig,
+  RestaurantAddress,
+  Locales,
 } from './models/index';
 import { SearchModule } from './search/search.module';
 import { RestaurantCategoriesModule } from './restaurant-types/restaurant-types.module';
@@ -49,18 +51,20 @@ import { GlobalConfModule } from './global-conf/global-conf.module';
         logging: false,
         models: [
           User,
+          UserAddress,
+          UserPaymentMethod,
           Restaurant,
           RestaurantSettings,
           RestaurantTypes,
           RestaurantTypesJunctions,
-          Products,
+          RestaurantAddress,
           FavoriteRestaurants,
-          UserAddress,
+          Products,
           PaymentTransactions,
-          UserPaymentMethod,
           Orders,
           OrderProducts,
           GlobalConfig,
+          Locales,
         ],
         pool: {
           min: 0,
