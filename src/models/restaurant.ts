@@ -15,6 +15,7 @@ import {
   RestaurantTypesJunctions,
   RestaurantSettings,
   FavoriteRestaurants,
+  RestaurantAddress,
 } from './index';
 
 @Table
@@ -33,17 +34,11 @@ export class Restaurant extends Model {
   @ForeignKey(() => User)
   ownerId: number;
 
-  @Column({ allowNull: false })
-  address: string;
-
-  @Column({ allowNull: false })
-  city: string;
-
-  @Column({ allowNull: false })
-  phoneNumber: string;
-
   @HasMany(() => RestaurantTypesJunctions)
   types: RestaurantTypesJunctions[];
+
+  @HasOne(() => RestaurantAddress)
+  restaurantAddress: RestaurantAddress;
 
   @HasOne(() => RestaurantSettings)
   settings: RestaurantSettings;
