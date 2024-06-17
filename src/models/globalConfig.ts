@@ -1,12 +1,20 @@
-import { Column, Model, PrimaryKey, Table } from 'sequelize-typescript';
+import {
+  Column,
+  Model,
+  PrimaryKey,
+  Table,
+  DataType,
+} from 'sequelize-typescript';
 
-@Table
-export class GlobalConfig extends Model {
+@Table({ tableName: 'GlobalConfigs' })
+export class GlobalConfigs extends Model {
   @PrimaryKey
-  @Column({ unique: true })
+  @Column({ type: DataType.INTEGER, autoIncrement: true })
   id: number;
+
+  @Column({ type: DataType.STRING, allowNull: false })
   key: string;
 
-  @Column
+  @Column({ type: DataType.STRING, allowNull: false })
   value: string;
 }

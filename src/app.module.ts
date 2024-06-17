@@ -31,6 +31,7 @@ import { ProfileModule } from './profile/profile.module';
 import { PaymentsModule } from './payments/payments.module';
 import { OrdersModule } from './orders/orders.module';
 import { GlobalConfModule } from './global-conf/global-conf.module';
+import { CalculationModule } from './calculation/calculation.module';
 
 @Module({
   imports: [
@@ -85,6 +86,7 @@ import { GlobalConfModule } from './global-conf/global-conf.module';
     OrdersModule,
     ConfigModule,
     GlobalConfModule,
+    CalculationModule,
   ],
   controllers: [],
   providers: [],

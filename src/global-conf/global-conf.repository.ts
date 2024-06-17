@@ -1,6 +1,6 @@
-import { GlobalConfig } from '../models/index';
+import { GlobalConfigs } from '../models/index';
 
 export const globalConfigRepository = {
   provide: 'GLOBAL_CONFIG_REPO',
-  useValue: GlobalConfig,
+  useValue: GlobalConfigs,
 };

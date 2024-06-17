@@ -1,4 +1,4 @@
-export function toFixedMoney(distance, size = 2) {
+export function toFixedMoney(distance: number, size = 2): number {
   if (!distance || distance === 0) {
     return 0;
   }

@@ -1,11 +1,36 @@
+// migrations/202106140001-create-global-configs.js
 'use strict';
 
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('GlobalConfig', {
-      key: { primaryKey: true, unique: true, type: Sequelize.STRING },
-      value: { type: Sequelize.STRING },
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable('GlobalConfigs', {
+      id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      key: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      value: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      createdAt: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.fn('NOW'),
+      },
+      updatedAt: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.fn('NOW'),
+      },
     });
+  },
+
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable('GlobalConfigs');
   },
 };

@@ -13,7 +13,6 @@ import { OrderProducts } from './orderProducts';
 import { GlobalConfig } from './globalConfig';
 import { RestaurantAddress } from './restaurantAddress';
 import { Locales } from './Locales';
-
 export {
   User,
   UserAddress,
