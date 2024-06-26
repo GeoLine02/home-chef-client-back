@@ -32,6 +32,7 @@ import { PaymentsModule } from './payments/payments.module';
 import { OrdersModule } from './orders/orders.module';
 import { GlobalConfModule } from './global-conf/global-conf.module';
 import { CalculationModule } from './calculation/calculation.module';
+import { SessionModule } from './session/session.module';
 
 @Module({
   imports: [
@@ -87,6 +88,7 @@ import { CalculationModule } from './calculation/calculation.module';
     ConfigModule,
     GlobalConfModule,
     CalculationModule,
+    SessionModule,
   ],
   controllers: [],
   providers: [],
