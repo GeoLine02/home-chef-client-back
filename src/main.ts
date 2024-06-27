@@ -13,12 +13,12 @@ async function bootstrap() {
   app.use(
     session({
       genid: (_req) => uuidv4(),
-      secret: process.env.SESSION_SECRET,
-      resave: true,
-      saveUninitialized: false,
+      secret: process.env.SESSION_SECRET || 'your-secret-key', // Ensure to use a strong secret key
+      resave: false, // Resave only if session data has been modified
+      saveUninitialized: false, // Don't save empty sessions
       cookie: {
-        secure: false,
-        maxAge: 3600000,
+        secure: false, // Set to true if using HTTPS
+        maxAge: 3600000, // Session expiration time (1 hour in milliseconds)
       },
     }),
   );

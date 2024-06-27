@@ -21,4 +21,8 @@ export class SessionService {
 
     session.order.push(meal);
   }
+
+  getOrder(session: Record<string, any>): any[] {
+    return session.order || [];
+  }
 }
