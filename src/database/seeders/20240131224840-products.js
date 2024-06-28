@@ -28,6 +28,7 @@ module.exports = {
       productComposition: faker.commerce.productDescription(),
       productPrice: Math.floor(Math.random() * 1200),
       productPhoto: imgAddress,
+      weight: faker.number.float(),
     }));
 
     await queryInterface.bulkInsert('Products', products);

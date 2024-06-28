@@ -33,6 +33,9 @@ export class Products extends Model {
   @Column
   productPhoto: string;
 
+  @Column
+  weight: number;
+
   @BelongsToMany(() => Orders, () => OrderProducts)
   orders: Orders[];
 }
