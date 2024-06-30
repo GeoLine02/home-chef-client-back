@@ -4,7 +4,7 @@ import {
   Injectable,
   InternalServerErrorException,
 } from '@nestjs/common';
-import { CreateOrderDto } from './dto/create-order.dto';
+import { OrderDTO } from './dto/create-order.dto';
 import {
   OrderProducts,
   Orders,
@@ -22,17 +22,13 @@ export class OrdersService {
     @Inject('PRODUCTS_REPOSITORY')
     private readonly productsRepository: typeof Products,
   ) {}
-  async createOrder(userID: number, createOrder: CreateOrderDto) {
-    console.log(createOrder);
+  async createOrder(userID: number, createOrder: OrderDTO) {
     try {
       const products = await this.productsRepository.findAll({
-        where: { id: createOrder.products.map((i) => i.product.id) },
+        where: { id: createOrder.orderProducts.map((i) => i.id) },
       });
 
-      const totalAmount = createOrder.products.reduce((acc, item) => {
-        acc += item.product.productPrice * item.quantity;
-        return acc;
-      }, 0);
+      const totalAmount = 0;
 
       const order = await this.orderRepository.create({
         userID,

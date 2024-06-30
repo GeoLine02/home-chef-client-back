@@ -11,6 +11,7 @@ import {
 import axios from 'axios';
 import { Response } from 'express';
 import { CustomOrderType } from 'src/types/custom.types';
+import { CalculationService } from 'src/calculation/calculation.service';
 
 @Injectable()
 export class PaymentsService {
@@ -19,6 +20,7 @@ export class PaymentsService {
     private userPaymentRepository: typeof UserPaymentMethod,
     @Inject('USER_PAYMENT_TRANSACTIONS_REPOSITORY')
     private paymentTransactionsRepository: typeof PaymentTransactions,
+    private readonly calculationService: CalculationService,
   ) {}
   async paymentGateWay(
     paymentData: CustomOrderType,
@@ -29,11 +31,8 @@ export class PaymentsService {
     try {
       const { products } = paymentData;
 
-      const deliveryPrice = 5;
-      const cartItemsAmount = products.reduce((acc, item) => {
-        acc += item.product.productPrice * item.quantity;
-        return acc;
-      }, 0);
+      const totalPrice =
+        await this.calculationService.calculateOrderTotalPrice(products);
 
       const options = {
         method: 'PUT',
@@ -46,9 +45,7 @@ export class PaymentsService {
           apiKey: process.env.PAYZE_API_KEY,
           apiSecret: process.env.PAYZE_API_SECRET,
           source: 'Card',
-          // token: 'CC078875E5F6439F9CD85F4E1',
-          amount: cartItemsAmount + deliveryPrice,
-
+          amount: totalPrice,
           currency: 'GEL',
           language: 'EN',
           cardPayment: {

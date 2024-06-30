@@ -3,7 +3,6 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   UseInterceptors,
@@ -11,8 +10,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { OrdersService } from './orders.service';
-import { CreateOrderDto } from './dto/create-order.dto';
-import { UpdateOrderDto } from './dto/update-order.dto';
+import { OrderDTO } from './dto/create-order.dto';
 import { TransactionInterceptor } from 'src/interceptors/transaction.interceptor';
 
 @Controller('orders')
@@ -22,7 +20,7 @@ export class OrdersController {
   @Post()
   @UseInterceptors(TransactionInterceptor)
   create(
-    @Body() createOrderDto: CreateOrderDto,
+    @Body() createOrderDto: OrderDTO,
 
     @Param('userID', new ParseIntPipe()) userID: number,
   ) {

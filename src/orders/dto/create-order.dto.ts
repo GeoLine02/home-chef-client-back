@@ -1,15 +1,61 @@
-import { IsArray, IsNumber } from 'class-validator';
-import { Products } from 'src/database/models/index';
+import {
+  IsArray,
+  IsNotEmpty,
+  IsObject,
+  ValidateNested,
+  ArrayMinSize,
+  ArrayMaxSize,
+  IsInt,
+  Min,
+  IsString,
+  IsOptional,
+} from 'class-validator';
+import { Type } from 'class-transformer';
+import {
+  IOrder,
+  IOrderProduct,
+  IDeliveryPoint,
+  IDeliveryOptions,
+} from '../interfaces/order.interfaces';
 
-interface CustomProductType {
-  product: Products;
+export class OrderProduct implements IOrderProduct {
+  @IsInt()
+  id: number;
+
+  @IsInt()
+  @Min(1)
   quantity: number;
 }
 
-export class CreateOrderDto {
-  @IsArray()
-  products: CustomProductType[];
+export class DeliveryPointDTO implements IDeliveryPoint {
+  @IsString()
+  @IsNotEmpty()
+  address: string;
+}
 
-  @IsNumber()
+export class DeliveryOptionsDTO implements IDeliveryOptions {
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => DeliveryPointDTO)
+  @ArrayMinSize(2)
+  @ArrayMaxSize(2)
+  points: DeliveryPointDTO[];
+}
+
+export class OrderDTO implements IOrder {
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => OrderProduct)
+  @IsNotEmpty()
+  orderProducts: OrderProduct[];
+
+  @IsObject()
+  @ValidateNested()
+  @Type(() => DeliveryOptionsDTO)
+  @IsNotEmpty()
+  deliveryOptions: DeliveryOptionsDTO;
+
+  @IsOptional()
+  @IsString()
   userAddressID: number;
 }
