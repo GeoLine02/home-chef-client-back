@@ -22,11 +22,11 @@ module.exports = {
         allowNull: false,
       },
       lat: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DECIMAL(10, 8),
         allowNull: true,
       },
       lng: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DECIMAL(11, 8),
         allowNull: false,
       },
       userID: {

@@ -30,8 +30,8 @@ export class UserAddress extends Model<UserAddress> {
   @Column
   lng: number;
 
-  @ForeignKey(() => User)
   @Column
+  @ForeignKey(() => User)
   userID: number;
 
   @BelongsTo(() => User)
