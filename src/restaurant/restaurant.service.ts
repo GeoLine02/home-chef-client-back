@@ -3,6 +3,7 @@ import { Op } from '@sequelize/core';
 import {
   Products,
   Restaurant,
+  RestaurantAddress,
   RestaurantSettings,
   RestaurantTypesJunctions,
 } from 'src/database/models/index';
@@ -49,6 +50,7 @@ export class RestaurantService {
           },
         ],
       },
+      include: [{ model: RestaurantAddress, as: 'address' }],
     };
     const cacheKey = JSON.stringify(queryParams);
     const cacheRes = await this.cacheManager.get(cacheKey);

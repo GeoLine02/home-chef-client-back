@@ -16,6 +16,10 @@ export class UserService {
   async finByEmail(email: string): Promise<any> {
     return await this.userRepository.findOne({
       where: { email, isAccountActive: true },
+      include: [
+        { model: UserAddress, as: 'userAddress' },
+        { model: FavoriteRestaurants, as: 'userFavoriteRestaurants' },
+      ],
       raw: true,
     });
   }
