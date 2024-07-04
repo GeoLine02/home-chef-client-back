@@ -8,10 +8,9 @@ import {
   DataType,
   BelongsTo,
 } from 'sequelize-typescript';
-import { Restaurant } from './index';
-import { Locales } from './index';
+import { Locales, Restaurant } from './index';
 
-@Table
+@Table({ tableName: 'RestaurantAddress' })
 export class RestaurantAddress extends Model {
   @PrimaryKey
   @AutoIncrement
