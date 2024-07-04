@@ -13,6 +13,7 @@ import {
 } from 'src/database/models/index';
 import { NewAddressDTO } from './dto/new-address.dto';
 import { UpdateAddressDTO } from './dto/update-address.dto';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class ProfileService {
@@ -163,13 +164,12 @@ export class ProfileService {
     userID: number,
     userAddressID: number,
     updateAddress: UpdateAddressDTO,
-  ): Promise<UserAddress> {
+  ): Promise<any> {
     try {
-      const isUpdated = await this.userAddressRepository.update<UserAddress>(
+      const isUpdated = await this.userAddressRepository.update<any>(
         updateAddress,
-        { where: { id: userAddressID, userID } },
+        { where: { [Op.and]: [{ id: userAddressID }, { userID }] } },
       );
-
       if (!isUpdated[0]) {
         throw new BadRequestException();
       }

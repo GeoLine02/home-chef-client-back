@@ -38,11 +38,13 @@ export class ProfileController {
   //////////////////////////////////////////////////////////
 
   //Address Features///////////////////////////////////////
-  @Post('new-address/:userID')
+  @Post('/new-address/:userID')
   async newAddress(
     @Param('userID') userID: string,
     @Body() newAddress: NewAddressDTO,
   ) {
+    console.log('@@@@@@@@@@userID', userID);
+    console.log('@@@@@@@@@@@@@@@newAddress', newAddress);
     return await this.profileService.addNewAddress(+userID, newAddress);
   }
 
@@ -63,7 +65,7 @@ export class ProfileController {
     );
   }
 
-  @Patch('update-address/:userID/:userAddressID')
+  @Patch('/update-address/:userID/:userAddressID')
   async updateMyAddress(
     @Param('userID') userID: string,
     @Param('userAddressID') userAddressID: string,
