@@ -50,7 +50,6 @@ export class RestaurantService {
           },
         ],
       },
-      include: [{ model: RestaurantAddress, as: 'address' }],
     };
     const cacheKey = JSON.stringify(queryParams);
     const cacheRes = await this.cacheManager.get(cacheKey);
@@ -60,7 +59,10 @@ export class RestaurantService {
 
     const query: any = {
       where: {},
-      include: [activeRestaurantSettingsJoin],
+      include: [
+        activeRestaurantSettingsJoin,
+        { model: RestaurantAddress, required: true },
+      ],
     };
 
     const { selectedCategoryId, offset } = queryParams;

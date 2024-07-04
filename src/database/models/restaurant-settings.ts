@@ -8,7 +8,7 @@ import {
 import { Restaurant } from './index';
 import { TIME } from 'sequelize';
 
-@Table
+@Table({ tableName: 'RestaurantSettings' })
 export class RestaurantSettings extends Model {
   @ForeignKey(() => Restaurant)
   @Column
