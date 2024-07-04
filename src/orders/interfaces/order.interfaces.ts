@@ -8,6 +8,7 @@ export interface IDeliveryPoint {
 }
 
 export interface IDeliveryOptions {
+  matter?: string;
   points: IDeliveryPoint[];
 }
 

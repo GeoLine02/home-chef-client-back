@@ -22,34 +22,41 @@ export class OrdersService {
     @Inject('PRODUCTS_REPOSITORY')
     private readonly productsRepository: typeof Products,
   ) {}
-  async createOrder(userID: number, createOrder: OrderDTO) {
+  async createOrder(userID: number, createOrder: OrderDTO, transaction: any) {
     try {
       const products = await this.productsRepository.findAll({
         where: { id: createOrder.orderProducts.map((i) => i.id) },
+        transaction,
       });
 
       const totalAmount = 0;
 
-      const order = await this.orderRepository.create({
-        userID,
-        totalAmount: totalAmount + 5,
-        amount: totalAmount,
-        deliveryAmount: 5,
-        userAddressID: createOrder.userAddressID,
-      });
+      const order = await this.orderRepository.create(
+        {
+          userID,
+          totalAmount: totalAmount + 5,
+          amount: totalAmount,
+          deliveryAmount: 5,
+          userAddressID: createOrder.userAddressID,
+        },
+        { transaction },
+      );
 
       await Promise.all(
         products.map(
           async (product) =>
-            await this.orderProductsRepository.create({
-              orderID: order.id,
-              productID: product.id,
-            }),
+            await this.orderProductsRepository.create(
+              {
+                orderID: order.id,
+                productID: product.id,
+              },
+              { transaction },
+            ),
         ),
       );
+
       return order;
     } catch (error) {
-      console.log(error);
       switch (error.parent.code) {
         case '22P02':
           throw new BadGatewayException(error.parent.message);
