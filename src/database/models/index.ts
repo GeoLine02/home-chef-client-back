@@ -13,6 +13,7 @@ import { OrderProducts } from './orderProducts';
 import { GlobalConfigs } from './globalConfig';
 import { RestaurantAddress } from './restaurantAddress';
 import { Locales } from './Locales';
+import { Months } from './months';
 export {
   User,
   UserAddress,
@@ -29,4 +30,5 @@ export {
   GlobalConfigs,
   RestaurantAddress,
   Locales,
+  Months,
 };

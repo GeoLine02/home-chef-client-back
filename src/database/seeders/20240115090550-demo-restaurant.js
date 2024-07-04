@@ -4,10 +4,6 @@ let userId = 1;
 
 const createRestaurantArray = () => ({
   name: faker.company.name(),
-  // address: faker.location.streetAddress(false),
-  // city: faker.location.city(),
-  // email: faker.internet.email(),
-  // phoneNumber: faker.phone.number(),
   ownerId: userId++,
 });
 /** @type {import('sequelize-cli').Migration} */

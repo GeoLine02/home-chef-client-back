@@ -7,9 +7,10 @@ import { GlobalConfService } from 'src/global-conf/global-conf.service';
 import { productsRepository } from 'src/products/products.repository';
 import { ProductsModule } from 'src/products/products.module';
 import { ProductsService } from 'src/products/products.service';
+import { MqModule } from 'src/mq/mq.module';
 
 @Module({
-  imports: [GlobalConfModule, ProductsModule],
+  imports: [GlobalConfModule, ProductsModule, MqModule],
   providers: [
     CalculationService,
     globalConfigRepository,
@@ -18,5 +19,6 @@ import { ProductsService } from 'src/products/products.service';
     ProductsService,
   ],
   controllers: [CalculationController],
+  exports: [CalculationService],
 })
 export class CalculationModule {}
