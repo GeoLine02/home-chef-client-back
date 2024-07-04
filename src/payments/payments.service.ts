@@ -12,6 +12,7 @@ import axios from 'axios';
 import { Response } from 'express';
 import { CustomOrderType } from 'src/types/custom.types';
 import { CalculationService } from 'src/calculation/calculation.service';
+import { MqService } from 'src/mq/mq.service';
 
 @Injectable()
 export class PaymentsService {
@@ -21,6 +22,7 @@ export class PaymentsService {
     @Inject('USER_PAYMENT_TRANSACTIONS_REPOSITORY')
     private paymentTransactionsRepository: typeof PaymentTransactions,
     private readonly calculationService: CalculationService,
+    private readonly mqService: MqService,
   ) {}
   async paymentGateWay(
     paymentData: CustomOrderType,
@@ -29,10 +31,9 @@ export class PaymentsService {
     orderID: number,
   ) {
     try {
-      const { products } = paymentData;
-
+      const orderData = paymentData;
       const totalPrice =
-        await this.calculationService.calculateOrderTotalPrice(products);
+        await this.calculationService.calculateOrderTotalPrice(orderData);
 
       const options = {
         method: 'PUT',
@@ -49,7 +50,7 @@ export class PaymentsService {
           currency: 'GEL',
           language: 'EN',
           cardPayment: {
-            tokenizeCard: paymentData.tokenizeCard,
+            tokenizeCard: orderData.tokenizeCard,
             preauthorize: false,
           },
           hooks: {
@@ -67,7 +68,17 @@ export class PaymentsService {
         return res.status(201).json(response);
       }
 
-      res.status(201).json({ paymentUrl: response.paymentUrl });
+      //if payment success create order
+      const isOrderDeliveryCreated = await this.mqService.sendRequest(
+        'create_delivery',
+        orderData.deliveryOptions,
+      );
+
+      if (!isOrderDeliveryCreated) {
+        throw new InternalServerErrorException();
+      }
+
+      return { paymentUrl: response.paymentUrl };
     } catch (error) {
       throw new Error(error);
     }

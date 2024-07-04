@@ -13,29 +13,47 @@ import { Response, Request } from 'express';
 import { TransactionInterceptor } from 'src/interceptors/transaction.interceptor';
 import { OrdersService } from 'src/orders/orders.service';
 import { CustomOrderType } from 'src/types/custom.types';
+import { Sequelize } from 'sequelize-typescript';
 
 @Controller('payments')
 export class PaymentsController {
   constructor(
     private readonly paymentsService: PaymentsService,
     private readonly ordersService: OrdersService,
+    private sequelize: Sequelize,
   ) {}
 
   @Post('gateway/:userID')
-  @UseInterceptors(TransactionInterceptor)
   async payment(
     @Body() paymentData: CustomOrderType,
     @Param('userID') userID: string,
     @Res() response: Response,
   ) {
-    const order = await this.ordersService.createOrder(+userID, paymentData);
+    const transaction = await this.sequelize.transaction();
 
-    return await this.paymentsService.paymentGateWay(
-      paymentData,
-      +userID,
-      response,
-      +order.id,
-    );
+    try {
+      const order = await this.ordersService.createOrder(
+        +userID,
+        paymentData,
+        transaction,
+      );
+
+      const paymentUrl = await this.paymentsService.paymentGateWay(
+        paymentData,
+        +userID,
+        response,
+        +order.id,
+      );
+
+      await transaction.commit();
+
+      return response.status(200).json(paymentUrl);
+    } catch (error) {
+      await transaction.rollback();
+      return response
+        .status(500)
+        .json({ success: false, message: error.message });
+    }
   }
 
   // @Get('tokenize')
@@ -86,6 +104,7 @@ export class PaymentsController {
     }
 
     if (PaymentStatus === 'Failed') {
+      // must be implemented in future
     }
   }
 }

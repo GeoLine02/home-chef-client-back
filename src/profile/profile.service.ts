@@ -5,7 +5,6 @@ import {
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
-
 import {
   Restaurant,
   FavoriteRestaurants,

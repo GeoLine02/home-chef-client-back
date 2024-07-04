@@ -12,19 +12,24 @@ import {
 import { OrdersService } from './orders.service';
 import { OrderDTO } from './dto/create-order.dto';
 import { TransactionInterceptor } from 'src/interceptors/transaction.interceptor';
+import { Sequelize } from 'sequelize-typescript';
 
 @Controller('orders')
 export class OrdersController {
-  constructor(private readonly ordersService: OrdersService) {}
+  constructor(
+    private readonly ordersService: OrdersService,
+    private sequelize: Sequelize,
+  ) {}
 
   @Post()
   @UseInterceptors(TransactionInterceptor)
-  create(
+  async create(
     @Body() createOrderDto: OrderDTO,
 
     @Param('userID', new ParseIntPipe()) userID: number,
   ) {
-    return this.ordersService.createOrder(userID, createOrderDto);
+    const transaction = await this.sequelize.transaction();
+    return this.ordersService.createOrder(userID, createOrderDto, transaction);
   }
 
   @Get()

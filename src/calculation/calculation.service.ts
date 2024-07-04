@@ -24,10 +24,10 @@ export class CalculationService {
 
   private async calculateDeliveryPrice(
     deliveryData: IDeliveryOptions,
-  ): Promise<number> {
+  ): Promise<{ deliveryCost: number; provider: string }> {
     const deliveryTotalCost = await this.mqService.sendRequest(
       'calculate_delivery_price',
-      deliveryData.points,
+      deliveryData,
     );
 
     return deliveryTotalCost;
@@ -39,8 +39,7 @@ export class CalculationService {
         this.calculateDeliveryPrice(orderData.deliveryOptions),
         this.calculateProductsCost(orderData.orderProducts),
       ]);
-
-      const totalCost = deliveryInfo + productCosts;
+      const totalCost = deliveryInfo.deliveryCost + productCosts;
       const serviceFee = await this.getFeeFromTotalCost(totalCost);
 
       return toFixedMoney(totalCost + serviceFee);
