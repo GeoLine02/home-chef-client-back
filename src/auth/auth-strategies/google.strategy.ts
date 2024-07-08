@@ -29,7 +29,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
     const { name, emails, photos } = profile || {};
     const email = emails[0].value;
     let user = await this.userService.finByEmail(email);
-    let jwt: string;
+
     if (!user) {
       user = await this.userService.create({
         email,
@@ -41,7 +41,8 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
       });
     }
     const stringify = JSON.stringify(user);
-    jwt = await this.jwtService.signAsync(stringify);
+    const jwt = await this.jwtService.signAsync(stringify);
+
     return done(null, jwt);
   }
 }
