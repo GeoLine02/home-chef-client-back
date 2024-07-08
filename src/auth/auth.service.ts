@@ -23,7 +23,7 @@ export class AuthService {
         throw new BadRequestException({ message: 'incorrect email format' });
       }
 
-      let result = await this.userService.finByEmail(email);
+      const result = await this.userService.finByEmail(email);
 
       if (!result) {
         return false;
@@ -35,6 +35,7 @@ export class AuthService {
       throw error;
     }
   }
+
   async authWithGoogle(request: any) {
     try {
       if (!request.user) {
