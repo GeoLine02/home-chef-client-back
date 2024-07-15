@@ -103,7 +103,12 @@ export class RestaurantService {
   async getRestaurantByID(id: number): Promise<any> {
     return await this.restaurantRepository.findOne({
       where: { id },
-      include: [Products],
+      include: [
+        Products,
+        RestaurantSettings,
+        RestaurantAddress,
+        RestaurantTypesJunctions,
+      ],
     });
   }
 }
